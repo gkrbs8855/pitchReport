@@ -113,11 +113,12 @@ export default function OnboardingPage() {
             <div className="absolute top-[-10%] right-[-10%] w-80 h-80 bg-primary/10 rounded-full blur-[120px] -z-10" />
 
             <header className="p-8 pb-4 flex items-center gap-5">
-                {step > 1 && (
-                    <button onClick={handleBack} className="w-10 h-10 glass-card rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all premium-border">
-                        <ChevronLeft size={20} />
-                    </button>
-                )}
+                <button
+                    onClick={() => step > 1 ? handleBack() : router.push("/")}
+                    className="w-10 h-10 glass-card rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all premium-border"
+                >
+                    <ChevronLeft size={20} />
+                </button>
                 <div className="flex-1">
                     <h1 className="text-[10px] font-bold tracking-[0.3em] text-slate-500 uppercase mb-1">Onboarding Ritual</h1>
                     <p className="text-sm font-bold text-white tracking-tight">Step {step} of 4</p>

@@ -100,7 +100,6 @@ export default function SessionDetailPage() {
             {/* Ambient Background Light */}
             <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[120px] -z-10" />
 
-            {/* 헤더 */}
             <header className="sticky top-0 z-20 bg-[#050506]/80 backdrop-blur-xl px-6 pt-10 pb-6 flex items-center justify-between border-b border-white/5 shadow-2xl">
                 <div className="flex items-center gap-4">
                     <button onClick={() => router.push("/sessions")} className="w-10 h-10 glass-card rounded-full flex items-center justify-center text-slate-400 hover:text-white transition-all premium-border">
@@ -112,27 +111,6 @@ export default function SessionDetailPage() {
                             {new Date(session.created_at).toLocaleDateString()} · {Math.floor(session.duration_sec / 60)}분 {(session.duration_sec % 60)}초
                         </p>
                     </div>
-                </div>
-                <div className="flex items-center gap-3">
-                    <button
-                        onClick={handleReanalyze}
-                        disabled={isReanalyzing || isFullReanalyzing}
-                        className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-primary premium-border active:scale-95 transition-transform disabled:opacity-50"
-                        title="AI 분석만 다시하기"
-                    >
-                        {isReanalyzing ? <Loader2 size={18} className="animate-spin" /> : <RefreshCcw size={18} />}
-                    </button>
-                    <button
-                        onClick={handleFullReanalyze}
-                        disabled={isReanalyzing || isFullReanalyzing}
-                        className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-amber-400 premium-border active:scale-95 transition-transform disabled:opacity-50"
-                        title="음성 인식부터 전체 다시하기"
-                    >
-                        {isFullReanalyzing ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} className="fill-amber-400/20" />}
-                    </button>
-                    <button className="w-10 h-10 glass-card rounded-xl flex items-center justify-center text-slate-300 premium-border active:scale-95 transition-transform">
-                        <Share2 size={18} />
-                    </button>
                 </div>
             </header>
 
@@ -501,6 +479,6 @@ export default function SessionDetailPage() {
             </div>
 
 
-        </div>
+        </div >
     );
 }

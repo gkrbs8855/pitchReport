@@ -147,7 +147,7 @@ export default function LandingPage() {
                     </p>
                     <Link
                         href="/onboarding"
-                        className="inline-flex items-center justify-center px-12 py-5 font-black text-[#050506] transition-all bg-white rounded-2xl shadow-xl hover:scale-105 active:scale-95 duration-300"
+                        className="inline-flex items-center justify-center px-10 py-5 font-black text-[#050506] transition-all bg-white rounded-2xl shadow-xl hover:scale-105 active:scale-95 duration-300 whitespace-nowrap text-[15px] min-w-[200px]"
                     >
                         지금 바로 시작하기
                     </Link>
