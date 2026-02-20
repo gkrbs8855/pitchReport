@@ -20,13 +20,34 @@ export default function UploadPage() {
     const startRecording = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const recorder = new MediaRecorder(stream);
+
+            // 지원하는 MIME 타입을 순서대로 확인
+            const types = [
+                'audio/webm;codecs=opus',
+                'audio/webm',
+                'audio/mp4',
+                'audio/aac'
+            ];
+
+            let selectedType = '';
+            for (const type of types) {
+                if (MediaRecorder.isTypeSupported(type)) {
+                    selectedType = type;
+                    break;
+                }
+            }
+
+            const recorder = new MediaRecorder(stream, { mimeType: selectedType });
             mediaRecorderRef.current = recorder;
 
             const chunks: BlobPart[] = [];
-            recorder.ondataavailable = (e) => chunks.push(e.data);
+            recorder.ondataavailable = (e) => {
+                if (e.data.size > 0) chunks.push(e.data);
+            };
+
             recorder.onstop = () => {
-                const blob = new Blob(chunks, { type: "audio/webm" });
+                const extension = selectedType.includes('mp4') || selectedType.includes('aac') ? 'mp4' : 'webm';
+                const blob = new Blob(chunks, { type: selectedType || 'audio/webm' });
                 setAudioBlob(blob);
                 stream.getTracks().forEach(track => track.stop());
             };
@@ -67,12 +88,14 @@ export default function UploadPage() {
                 return;
             }
 
-            const fileName = `${userId}/${Date.now()}.webm`;
+            const isMp4 = audioBlob.type.includes('mp4') || audioBlob.type.includes('aac');
+            const fileExt = isMp4 ? 'mp4' : 'webm';
+            const fileName = `${userId}/${Date.now()}.${fileExt}`;
 
             const { data: uploadData, error: uploadError } = await supabase.storage
                 .from("audio_buckets")
                 .upload(fileName, audioBlob, {
-                    contentType: 'audio/webm',
+                    contentType: audioBlob.type,
                     cacheControl: '3600',
                     upsert: false
                 });
