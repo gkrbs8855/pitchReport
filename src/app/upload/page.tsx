@@ -71,7 +71,11 @@ export default function UploadPage() {
 
             const { data: uploadData, error: uploadError } = await supabase.storage
                 .from("audio_buckets")
-                .upload(fileName, audioBlob);
+                .upload(fileName, audioBlob, {
+                    contentType: 'audio/webm',
+                    cacheControl: '3600',
+                    upsert: false
+                });
 
             if (uploadError) throw uploadError;
 
