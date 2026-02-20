@@ -6,16 +6,16 @@ import { useRouter, usePathname } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function MainHeader() {
-    const [userName, setUserName] = useState("영업 마스터");
+    const [academyName, setAcademyName] = useState("영업 마스터");
     const router = useRouter();
     const pathname = usePathname();
 
     useEffect(() => {
         const userId = localStorage.getItem("user_id");
         if (userId) {
-            supabase.from("users").select("name").eq("id", userId).single()
+            supabase.from("company_profiles").select("company_name").eq("user_id", userId).single()
                 .then(({ data }) => {
-                    if (data?.name) setUserName(data.name);
+                    if (data?.company_name) setAcademyName(data.company_name);
                 });
         }
     }, []);
@@ -30,7 +30,7 @@ export default function MainHeader() {
                 </div>
                 <div className="flex items-center gap-2 mt-1">
                     <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
-                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.1em]">{userName} 님</p>
+                    <p className="text-[10px] text-slate-500 font-bold uppercase tracking-[0.1em]">{academyName}</p>
                 </div>
             </div>
 

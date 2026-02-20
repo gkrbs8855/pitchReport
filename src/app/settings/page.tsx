@@ -1,36 +1,43 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { User, Bell, Shield, CircleHelp, LogOut, ChevronRight, Sparkles, Star, Mic, ArrowLeft, Settings as SettingsIcon, Globe, Mail, ExternalLink } from "lucide-react";
+import { User, Bell, Shield, CircleHelp, LogOut, ChevronRight, Sparkles, Star, Mic, ArrowLeft, Settings as SettingsIcon, Globe, Mail, ExternalLink, MessageSquareText } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
 export default function SettingsPage() {
     const router = useRouter();
     const [user, setUser] = useState<any>(null);
+    const [academyName, setAcademyName] = useState("");
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const fetchUser = async () => {
+        const fetchData = async () => {
             const userId = localStorage.getItem("user_id");
             if (!userId) {
                 router.push("/login");
                 return;
             }
 
-            const { data, error } = await supabase
+            const { data: userData } = await supabase
                 .from("users")
                 .select("*")
                 .eq("id", userId)
                 .single();
 
-            if (data) {
-                setUser(data);
-            }
+            const { data: cpData } = await supabase
+                .from("company_profiles")
+                .select("company_name")
+                .eq("user_id", userId)
+                .maybeSingle();
+
+            if (userData) setUser(userData);
+            if (cpData?.company_name) setAcademyName(cpData.company_name);
+
             setLoading(false);
         };
 
-        fetchUser();
+        fetchData();
     }, [router]);
 
     const handleLogout = () => {
@@ -48,13 +55,13 @@ export default function SettingsPage() {
             icon: <Globe size={20} />,
             label: "공식 홈페이지",
             sub: "PitchReport 서비스 소개 보기",
-            action: () => window.open("https://pitchreport.vercel.app", "_blank")
+            action: () => window.open("https://pitch-report.vercel.app/", "_blank")
         },
         {
-            icon: <Mail size={20} />,
-            label: "문의 및 피드백",
-            sub: "개발 팀에 의견 보내기",
-            action: () => window.location.href = "mailto:support@pitchreport.com?subject=PitchReport Feedback"
+            icon: <MessageSquareText size={20} />,
+            label: "문의 및 피드백 (카카오톡)",
+            sub: "개발 팀과 실시간 상담하기",
+            action: () => window.open("https://open.kakao.com/o/snbGnrhi", "_blank")
         }
     ];
 
@@ -84,13 +91,13 @@ export default function SettingsPage() {
                 <section className="flex flex-col items-center">
                     <div className="relative mb-6">
                         <div className="w-24 h-24 premium-gradient rounded-[2.5rem] flex items-center justify-center text-white text-3xl font-bold shadow-[0_20px_50px_rgba(99,102,241,0.3)] border-4 border-[#050506]">
-                            {getInitials(user?.name)}
+                            {getInitials(academyName || "U")}
                         </div>
                         <div className="absolute -bottom-1 -right-1 w-9 h-9 glass-card rounded-xl flex items-center justify-center text-primary shadow-xl border border-white/10">
                             <Star size={16} className="fill-primary" />
                         </div>
                     </div>
-                    <h2 className="text-xl font-bold tracking-tight text-white mb-1">{user?.name || "사용자"}</h2>
+                    <h2 className="text-xl font-bold tracking-tight text-white mb-1">{academyName || "사업자 미지정"}</h2>
                     <p className="text-[11px] text-slate-500 font-bold uppercase tracking-[0.2em]">{user?.email || "email@example.com"}</p>
 
                     <div className="mt-5 bg-primary/10 px-4 py-1.5 rounded-full border border-primary/20">

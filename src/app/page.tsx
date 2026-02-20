@@ -18,10 +18,6 @@ export default function LandingPage() {
                     </div>
                     <span className="text-xl font-bold tracking-tighter text-white uppercase italic">PITCH<span className="text-primary/90 not-italic">REPORT</span></span>
                 </div>
-                <div className="hidden md:flex items-center gap-8 mr-8">
-                    <button className="text-[11px] font-bold text-slate-500 hover:text-white transition-all uppercase tracking-widest">기능</button>
-                    <button className="text-[11px] font-bold text-slate-500 hover:text-white transition-all uppercase tracking-widest">가격</button>
-                </div>
                 <Link href="/login" className="text-[11px] font-bold text-slate-400 hover:text-white transition-all px-6 py-2.5 rounded-full border border-white/5 hover:bg-white/5 bg-white/[0.02] uppercase tracking-widest">
                     LOGIN
                 </Link>
@@ -34,28 +30,25 @@ export default function LandingPage() {
                     <span className="text-[10px] font-bold tracking-[0.2em] text-slate-300 uppercase">AI Sales Performance platform</span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl font-black leading-[1.05] mb-10 tracking-tight text-white animate-in fade-in slide-in-from-bottom-4 duration-1000">
-                    계약으로 이어지는<br />
-                    <span className="text-gradient">확신을 기록합니다</span>
+                <h1 className="text-4xl md:text-7xl font-black leading-[1.15] md:leading-[1.05] mb-10 tracking-tight text-white animate-in fade-in slide-in-from-bottom-4 duration-1000 break-keep">
+                    압도적 상담 성과를 위한<br />
+                    <span className="text-gradient">가장 완벽한 기록</span>
                 </h1>
 
-                <p className="text-[16px] text-slate-400 leading-relaxed mb-16 max-w-[400px] font-medium animate-in fade-in slide-in-from-bottom-6 duration-1000">
+                <p className="text-[16px] text-slate-400 leading-relaxed mb-16 max-w-[400px] font-medium animate-in fade-in slide-in-from-bottom-6 duration-1000 break-keep">
                     당신의 학원 상담 대화를 AI가 정밀 분석하여<br />
                     놓치고 있던 <span className="text-white">성공의 포인트</span>를 짚어드립니다.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center gap-5 animate-in fade-in slide-in-from-bottom-8 duration-1000">
                     <Link
-                        href="/onboarding"
+                        href="/login"
                         className="group relative inline-flex items-center justify-center px-12 py-5 font-black text-white transition-all bg-primary rounded-2xl shadow-[0_20px_40px_rgba(99,102,241,0.3)] btn-hover-effect overflow-hidden"
                     >
                         <div className="absolute inset-0 shimmer opacity-20" />
                         지금 무료로 시작하기
                         <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
                     </Link>
-                    <button className="px-10 py-5 text-[13px] font-bold text-slate-400 hover:text-white transition-all">
-                        미리보기 영상 보기
-                    </button>
                 </div>
             </main>
 
@@ -115,14 +108,14 @@ export default function LandingPage() {
 
                 <p className="mt-12 text-[12px] font-bold text-slate-500 uppercase tracking-[0.3em] flex items-center gap-3">
                     <span className="w-10 h-[1px] bg-slate-800" />
-                    Trusted by 100+ Academies
+                    Empowering Local Academies
                     <span className="w-10 h-[1px] bg-slate-800" />
                 </p>
             </section>
 
-            {/* Feature Cards */}
+            {/* Feature Cards - Vertical Layout */}
             <section className="px-8 pb-40 z-10 animate-in fade-in slide-in-from-bottom-10 duration-1000">
-                <div className="grid gap-6 md:grid-cols-2 max-w-[900px] mx-auto">
+                <div className="flex flex-col gap-6 max-w-[800px] mx-auto">
                     <div className="glass-card p-10 rounded-[3rem] relative overflow-hidden group premium-border hover:bg-white/[0.04] transition-all">
                         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
                         <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 border border-primary/20">
@@ -149,8 +142,8 @@ export default function LandingPage() {
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/5 blur-[100px] -z-10" />
                     <h2 className="text-4xl font-black text-white mb-6 tracking-tight">성장의 지표를 확인하세요</h2>
                     <p className="text-[16px] text-slate-400 mb-10 max-w-[400px] mx-auto font-medium leading-relaxed">
-                        이미 많은 학원이 PITCHREPORT를 통해<br />
-                        상담 전환율의 비약적인 상승을 경험하고 있습니다.
+                        PITCHREPORT와 함께<br />
+                        상담 전환율의 비약적인 상승을 경험하세요.
                     </p>
                     <Link
                         href="/onboarding"
