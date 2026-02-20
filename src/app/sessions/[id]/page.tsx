@@ -164,7 +164,7 @@ export default function SessionDetailPage() {
                                     </div>
                                     <div className="flex flex-col gap-2">
                                         <span className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">Mentor's One-Line Insight</span>
-                                        <p className="text-lg sm:text-xl font-black text-white leading-tight tracking-tight italic">
+                                        <p className="text-base sm:text-lg font-black text-white leading-tight tracking-tight italic">
                                             "{session.feedback.mentor_summary}"
                                         </p>
                                     </div>
@@ -180,7 +180,7 @@ export default function SessionDetailPage() {
                                             <span className="text-emerald-500 text-lg">✦</span>
                                             <span className="text-[11px] font-black text-emerald-500 uppercase tracking-[0.15em]">핵심 강점 분석</span>
                                         </div>
-                                        <p className="text-[13px] text-slate-200 leading-[1.8] font-medium whitespace-pre-line">
+                                        <p className="text-[12px] text-slate-300 leading-[1.7] font-medium whitespace-pre-line">
                                             {session.feedback?.coaching?.strength || session.feedback?.strength || "분석 데이터를 불러오는 중입니다."}
                                         </p>
                                     </div>
@@ -194,7 +194,7 @@ export default function SessionDetailPage() {
                                             <span className="text-amber-500 text-lg">⚡</span>
                                             <span className="text-[11px] font-black text-amber-500 uppercase tracking-[0.15em]">핵심 개선 포인트</span>
                                         </div>
-                                        <p className="text-[13px] text-slate-200 leading-[1.8] font-medium whitespace-pre-line">
+                                        <p className="text-[12px] text-slate-300 leading-[1.7] font-medium whitespace-pre-line">
                                             {session.feedback?.coaching?.weakness || session.feedback?.weakness || "분석 데이터를 불러오는 중입니다."}
                                         </p>
                                     </div>
@@ -333,14 +333,10 @@ export default function SessionDetailPage() {
                                                         )}
 
                                                         {/* 멘토의 심층 코멘트 (Reason) */}
-                                                        {item.reason && (
-                                                            <div className="pl-2 border-l-2 border-primary/30">
-                                                                <p className="text-[13px] text-slate-200 leading-relaxed">
-                                                                    <span className="text-primary mr-1.5 align-text-bottom"><Sparkles size={14} className="inline" /></span>
-                                                                    {item.reason}
-                                                                </p>
-                                                            </div>
-                                                        )}
+                                                        <p className="text-[12px] text-slate-300 leading-relaxed font-medium">
+                                                            <span className="text-primary mr-1.5 align-text-bottom"><Sparkles size={13} className="inline" /></span>
+                                                            {item.reason}
+                                                        </p>
 
                                                         {/* 대안 스크립트 (Correction) */}
                                                         {item.ai_correction && item.type !== 'good' && (
@@ -379,7 +375,7 @@ export default function SessionDetailPage() {
                                                 <span className="text-violet-400 text-sm">📊</span>
                                                 <span className="text-[10px] font-black text-violet-400 uppercase tracking-[0.12em]">감정 흐름 & 사용 기법</span>
                                             </div>
-                                            <p className="text-[13px] text-slate-200 leading-[1.8] font-medium whitespace-pre-line">
+                                            <p className="text-[12px] text-slate-300 leading-[1.7] font-medium whitespace-pre-line">
                                                 {session.feedback.conversion.emotional_flow}
                                             </p>
                                         </div>
@@ -409,7 +405,7 @@ export default function SessionDetailPage() {
                                                 <span className="text-cyan-400 text-sm">🔍</span>
                                                 <span className="text-[10px] font-black text-cyan-400 uppercase tracking-[0.12em]">핵심 성공/실패 원인</span>
                                             </div>
-                                            <p className="text-[13px] text-slate-200 leading-[1.8] font-medium whitespace-pre-line">
+                                            <p className="text-[12px] text-slate-300 leading-[1.7] font-medium whitespace-pre-line">
                                                 {session.feedback.conversion.why_conversion_succeeded_or_failed}
                                             </p>
                                         </div>

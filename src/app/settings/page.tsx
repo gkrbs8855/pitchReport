@@ -52,12 +52,6 @@ export default function SettingsPage() {
 
     const menuItems = [
         {
-            icon: <Globe size={20} />,
-            label: "공식 홈페이지",
-            sub: "PitchReport 서비스 소개 보기",
-            action: () => window.open("https://pitch-report.vercel.app/", "_blank")
-        },
-        {
             icon: <MessageSquareText size={20} />,
             label: "문의 및 피드백 (카카오톡)",
             sub: "개발 팀과 실시간 상담하기",
