@@ -5,14 +5,15 @@ import { Play, Pause, RotateCcw, SkipBack, SkipForward, Volume2, Maximize2 } fro
 
 interface TimestampPlayerProps {
     audioUrl: string;
+    initialDuration?: number;
     onTimeUpdate?: (time: number) => void;
     seekTime?: { time: number, nonce: number };
 }
 
-export default function TimestampPlayer({ audioUrl, onTimeUpdate, seekTime }: TimestampPlayerProps) {
+export default function TimestampPlayer({ audioUrl, initialDuration, onTimeUpdate, seekTime }: TimestampPlayerProps) {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
+    const [duration, setDuration] = useState(initialDuration || 0);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
@@ -43,10 +44,13 @@ export default function TimestampPlayer({ audioUrl, onTimeUpdate, seekTime }: Ti
     };
 
     const handleLoadedMetadata = () => {
-        if (audioRef.current) setDuration(audioRef.current.duration);
+        if (audioRef.current && audioRef.current.duration && isFinite(audioRef.current.duration)) {
+            setDuration(audioRef.current.duration);
+        }
     };
 
     const formatTime = (seconds: number) => {
+        if (!seconds || !isFinite(seconds)) return "0:00";
         const min = Math.floor(seconds / 60);
         const sec = Math.floor(seconds % 60);
         return `${min}:${sec.toString().padStart(2, "0")}`;

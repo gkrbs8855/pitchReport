@@ -129,6 +129,7 @@ export default function SessionDetailPage() {
                 <div className="animate-in fade-in slide-in-from-top-4 duration-1000">
                     <TimestampPlayer
                         audioUrl={`https://vlszyfcydvwvejrulqws.supabase.co/storage/v1/object/public/audio_buckets/${session.audio_url}`}
+                        initialDuration={session.duration_sec}
                         onTimeUpdate={setCurrentTime}
                         seekTime={seekTime}
                     />
